@@ -3,7 +3,7 @@
   Requirements
     This project was tested on Ubuntu 12.10.
 
-      -to run spell checker you need JRE
+      -to run spell Backgammon you need JRE
         sudo apt-get install openjdk-6-jre
       -to compile java sources you need JDK
         sudo apt-get install openjdk-6-jdk
@@ -11,7 +11,35 @@
   Getting Started
     To get started with Backgammon, you'll need to get familiar with Git.
 
-    To initialize your local repository using the Spell Checker trees, use a command like this:
+    To initialize your local repository using the Backgammon trees, use a command like this:
           $ git clone https://github.com/TeacaAlex/Backgammon.git
     Then:
+          $ cd Backgammon/src/
+          $ make
+            open another terminal
+            $ java -jar server.jar
+          $ make run
+
+    The sintax for runninh server.jar is: java -jar server.jar 7777 100, where:
+        7777 = port to listen. Default port is 6666
+        100  = timeout
+
+    "make run" calls : java ClientStub 127.0.0.1 6666 7 7, where:
+        127.0.0.1 = local host
+        6666 = port to connect
+        7 = level. You can choose: 1, 5, 7, 8.
+
+  Results
+    Level 5: 70/100 victories
+    Level 7: 60-65 victories
+
+  Implementation
+    -using a minimax approach, I implemented AlphaBetaPruning on 3 levels with 4 types of
+    nodes (one for min and max, and two nodes chance for each player) to choose the good move;
+    -in leaf nodes, max choose the best evaluated board with Evaluare, then choose min
+    worst board until it reaches the parent node of simulation;
+    -with the move returned by alphabeta, i update the board and send to the
+    server my move;
+    - for better results can improve the function that evaluate the board;
+
 
